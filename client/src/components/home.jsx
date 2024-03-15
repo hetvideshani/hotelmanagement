@@ -8,7 +8,7 @@ const Home = () => {
 
     const getRoom = async () => {
         console.log("Hello");
-        const allRooms = await fetch('/getAllRoom'
+        const allRooms = await fetch('http://localhost:5555/getAllRoom'
             , {
                 method: "GET",
                 headers: {
@@ -50,7 +50,7 @@ const Home = () => {
     const logout = async () => {
         try {
             const outUser = await fetch('/logoutUser').catch(err => console.log(err))
-            
+
             navigate('/')
         } catch (err) {
             console.log(err);

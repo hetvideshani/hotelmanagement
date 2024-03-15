@@ -12,7 +12,7 @@ const HeroSection = () => {
     let heading = "Stay Quietly,\n With No Worries"
     return (
         <>
-            <div className='heroSection'>
+            <div className='heroSection w-screen h-screen'>
                 <div className="searchPage">
                     <div className="searchHotel">
                         <input type='text' placeholder="Search Destination / Hotel" className="inputBox" />

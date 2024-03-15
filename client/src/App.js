@@ -15,7 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<HeroSection />} />
-          <Route path='/home' element={<Extra />} />
+          <Route path='/home' element={<Home />} />
           <Route path='/home/:roomid' element={<Room />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/signin' element={<Signin />} />

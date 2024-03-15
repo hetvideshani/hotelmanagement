@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 const room = require('../schema/roomSchema.js')
 
 roomRouter.get('/getAllRoom', async (req, res) => {
+    console.log("Hello");
     const allRooms = await room.find();
 
-    return res.status(200).send(allRooms);
+    return res.status(200).json(allRooms);
 });
 
 roomRouter.get('/getOneRoom/:id', async (req, res) => {

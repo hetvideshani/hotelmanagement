@@ -12,7 +12,7 @@
 }
 
 .searchPage {
-    height: 45vh;
+    height: 50vh;
     width: 25%;
     position: relative;
     background-color: transparent;
@@ -126,7 +126,3 @@ input:hover {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
     height: 7vh;
 }
-
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
