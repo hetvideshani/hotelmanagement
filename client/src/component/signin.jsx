@@ -64,17 +64,23 @@ const Signin = () => {
                         <div className="text-white ml-3 mt-2" onClick={() => navigate('/')}>
                             Home
                         </div>
-                        <div className="text-white ml-3 mt-2">
-                            Rooms
-                        </div>
                         <div className="text-white ml-3 mt-2" onClick={() => {
-                            user ? navigate('/bookings') : Swal.fire({
+                            Swal.fire({
                                 icon: "error",
                                 title: "Oops...",
                                 text: "Please signup to check bookings",
                             });
                         }}>
                             Bookings
+                        </div>
+                        <div className="text-white ml-3 mt-2" onClick={() => {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                text: "Only Admin can access this page",
+                            });
+                        }}>
+                            Admin
                         </div>
                         <div className="text-white ml-3 mt-2">
                             About
@@ -92,7 +98,7 @@ const Signin = () => {
                         </button>
 
                         <IoMdHeart className='text-white h-10 w-8 mr-5' onClick={() => {
-                            user ? navigate('/wishlist') : Swal.fire({
+                            Swal.fire({
                                 icon: "error",
                                 title: "Oops...",
                                 text: "Please signup to check Wishlist",

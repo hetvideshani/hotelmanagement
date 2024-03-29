@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from './Navbar'
+import { useNavigate } from 'react-router-dom';
 
 const AdminBookings = () => {
     const [user, setUser] = useState(null);
     const [booking, setBooking] = useState([]);
+    const navigate = useNavigate();
+
+    const deletebooking = async (id) => {
+        console.log(id);
+        await fetch("http://localhost:5555/deleteBooking/" + id, {
+            method: "DELETE"
+        }).then(res => res.json()).then(res => setBooking(res));
+    }
 
     useEffect(() => {
         const userEmail = localStorage.getItem('email');
@@ -22,7 +31,7 @@ const AdminBookings = () => {
         return (
             <>
                 <tr className='h-[50px]'>
-                    <th>1</th>
+                    <th>{booking.indexOf(book) + 1}</th>
                     <th>{book.name}</th>
                     <th>{book.email}</th>
                     <th>{book.contactNo}</th>
@@ -31,7 +40,14 @@ const AdminBookings = () => {
                     <th>{book.payment}</th>
                     <th>{book.checkin}</th>
                     <th>{book.checkout}</th>
-                    <th><button className='bg-slate-700 text-white p-2'>Edit</button><button className='bg-red-600 text-white p-2 ml-2 rounded-lg'>Delete</button></th>
+                    <th>
+                        <button className='bg-slate-700 text-white p-2' onClick={() => {
+                            navigate('/bookingedit/' + book._id)
+                        }}>Edit</button>
+                        <button className='bg-red-600 text-white p-2 ml-2 rounded-lg' onClick={() => {
+                            deletebooking(book._id)
+                        }}>Delete</button>
+                    </th>
                 </tr>
             </>
         )

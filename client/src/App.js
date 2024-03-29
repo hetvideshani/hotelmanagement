@@ -13,6 +13,9 @@ import Layout from './component/admin/layout';
 import AdminRooms from './component/admin/AdminRooms';
 import AdminBookings from './component/admin/AdminBookings';
 import AdminUser from './component/admin/AdminUser';
+import UserEdit from './component/admin/UserEdit';
+import RoomEdit from './component/admin/RoomEdit';
+import BookingEdit from './component/admin/BookingEdit';
 
 function App() {
   return (
@@ -31,6 +34,9 @@ function App() {
           <Route path='/adminrooms' element={<AdminRooms />} />
           <Route path='/adminbookings' element={<AdminBookings />} />
           <Route path='/adminusers' element={<AdminUser />} />
+          <Route path='/useredit/:id' element={<UserEdit />} />
+          <Route path='/roomedit/:id' element={<RoomEdit />} />
+          <Route path='/bookingedit/:id' element={<BookingEdit />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -49,6 +49,8 @@ const Bookingform = () => {
 
         const result = await res.json();
 
+        navigate('/bookings')
+
         console.log(result);
         console.log(res.status);
     }

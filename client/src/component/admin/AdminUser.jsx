@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
+import { useNavigate } from 'react-router-dom';
 
 const AdminUser = () => {
     const [user, setUser] = useState(null);
     const [allUser, setAllUser] = useState([]);
+    const navigate = useNavigate();
 
     const deleteuser = async (id) => {
-        const res = await fetch("http://localhost:5555/getalluser" + id, {
+        console.log(id);
+        await fetch("http://localhost:5555/deleteUser/" + id, {
             method: "DELETE"
-        });
+        }).then(res => res.json()).then(res => setAllUser(res));
     }
 
     useEffect(() => {
@@ -28,11 +31,18 @@ const AdminUser = () => {
         return (
             <>
                 <tr className='h-[50px]'>
-                    <th>1</th>
+                    <th>{allUser.indexOf(insan) + 1}</th>
                     <th>{insan.name}</th>
                     <th>{insan.emailID}</th>
                     <th>{insan.contactNo}</th>
-                    <th><button className='bg-slate-700 text-white p-2'>Edit</button><button className='bg-red-600 text-white p-2 ml-2 rounded-lg'>Delete</button></th>
+                    <th>
+                        <button className='bg-slate-700 text-white p-2' onClick={() => {
+                            navigate('/useredit/' + insan._id)
+                        }}>Edit</button>
+                        <button className='bg-red-600 text-white p-2 ml-2 rounded-lg' onClick={() => {
+                            deleteuser(insan._id)
+                        }}>Delete</button>
+                    </th>
                 </tr>
             </>
         )

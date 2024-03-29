@@ -45,4 +45,35 @@ roomRouter.post('/addroom', async (req, res) => {
     }
 })
 
+roomRouter.delete('/deleteroom/:id', async (req, res) => {
+    try {
+        console.log("Hello");
+        const deleteRoom = await room.findByIdAndDelete({ _id: req.params.id })
+
+        const allRoom = await room.find();
+        return res.status(200).json(allRoom);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+roomRouter.patch('/updateroom/:id', async (req, res) => {
+    try {
+        let update = req.body.room;
+        console.log("Hello");
+        console.log(update);
+
+        let currentRoom = await room.findOne({ _id: req.params.id });
+
+        Object.keys(update).forEach(field => {
+            currentRoom[field] = update[field];
+        })
+
+        await currentRoom.save();
+        return res.status(200).json({ message: "User Updated" });
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 module.exports = roomRouter;

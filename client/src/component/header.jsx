@@ -11,6 +11,23 @@ const Header = memo(() => {
         setUser(localStorage.getItem('email'));
     }, []);
 
+    const checkAdmin = async () => {
+        const res = await fetch("http://localhost:5555/checkAdmin/" + user, {
+            method: "GET"
+        });
+
+        if (res.status === 201) {
+            navigate('/admindashboard')
+        }
+        else {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Only Admin can access this page",
+            });
+        }
+    }
+
     return (
         <>
             <div className="w-screen h-16 flex flex-row" style={{ backgroundColor: "#07122e" }}>
@@ -21,17 +38,17 @@ const Header = memo(() => {
                     <div className="text-white ml-3 mt-2" onClick={() => navigate('/')}>
                         Home
                     </div>
-                    <div className="text-white ml-3 mt-2">
-                        Rooms
-                    </div>
                     <div className="text-white ml-3 mt-2" onClick={() => {
                         user ? navigate('/bookings') : Swal.fire({
                             icon: "error",
                             title: "Oops...",
-                            text: "Please signup to check bookings",
+                            text: "Please login to check bookings",
                         });
                     }}>
                         Bookings
+                    </div>
+                    <div className="text-white ml-3 mt-2" onClick={checkAdmin}>
+                        Admin
                     </div>
                     <div className="text-white ml-3 mt-2">
                         About
@@ -61,7 +78,7 @@ const Header = memo(() => {
                         user ? navigate('/wishlist') : Swal.fire({
                             icon: "error",
                             title: "Oops...",
-                            text: "Please signup to check Wishlist",
+                            text: "Please login to check Wishlist",
                         });
                     }} />
                 </div>

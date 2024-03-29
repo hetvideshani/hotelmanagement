@@ -6,6 +6,7 @@ const user = require('../schema/userSchema');
 const room = require('../schema/roomSchema');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
+const admin = require('../schema/adminSchema')
 
 userRouter.post("/userSignin", async (req, res) => {
     const { emailID, password } = req.body;
@@ -130,6 +131,59 @@ userRouter.get('/getalluser', async (req, res) => {
         const allUser = await user.find();
         console.log(allUser);
         return res.status(200).json(allUser);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+userRouter.get('/getoneuser/:id', async (req, res) => {
+    try {
+        const currentUser = await user.findOne({ _id: req.params.id });
+
+        return res.status(200).json(currentUser);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+userRouter.delete('/deleteUser/:id', async (req, res) => {
+    try {
+        console.log("Hello");
+        const deleteUser = await user.findByIdAndDelete({ _id: req.params.id })
+
+        const allUser = await user.find();
+        return res.status(200).json(allUser);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+userRouter.get('/checkAdmin/:id', async (req, res) => {
+    try {
+        const isAdmin = await admin.findOne({ emailID: req.params.id })
+
+        if (isAdmin) {
+            return res.status(201).json({ message: "It's an admin" });
+        }
+        return res.status(200).json({ message: "It's not an admin" });
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+userRouter.patch('/updateuser/:id', async (req, res) => {
+    try {
+        let update = req.body.user;
+        console.log(update);
+        let currentUser = await user.findOne({ _id: req.params.id });
+
+        Object.keys(update).forEach(field => {
+            currentUser[field] = update[field];
+        })
+
+        await currentUser.save();
+
+        return res.status(200).json({ message: "User Updated" });
     } catch (error) {
         console.log(error);
     }
