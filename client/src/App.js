@@ -1,25 +1,36 @@
 import logo from './logo.svg';
+import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HeroSection from './components/heroSection';
-import Home from './components/home';
-import Room from './components/room';
-import Signup from './components/signup';
-import Signin from './components/signin';
-import UserHome from './components/userHome';
-import WishList from './components/wishList';
-import Extra from './components/extra';
+import Home from './component/home'
+import Signin from './component/signin';
+import Signup from './component/signup';
+import Room from './component/room';
+import Bookingform from './component/bookingform';
+import Bookings from './component/Bookings';
+import Wishlist from './component/WishList'
+import RoomFromWishlist from './component/RoomFromWishlist';
+import Layout from './component/admin/layout';
+import AdminRooms from './component/admin/AdminRooms';
+import AdminBookings from './component/admin/AdminBookings';
+import AdminUser from './component/admin/AdminUser';
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<HeroSection />} />
-          <Route path='/home' element={<Home />} />
-          <Route path='/home/:roomid' element={<Room />} />
-          <Route path='/signup' element={<Signup />} />
+          <Route path='/' element={<Home />} />
           <Route path='/signin' element={<Signin />} />
-          <Route path='/wishlist' element={<WishList />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/home/:roomid' element={<Room />} />
+          <Route path='/bookingform/:roomid' element={<Bookingform />} />
+          <Route path='/bookings' element={<Bookings />} />
+          <Route path='/wishlist' element={<Wishlist />} />
+          <Route path='/roomfromwishlist/:roomid' element={<RoomFromWishlist />} />
+          <Route path='/admindashboard' element={<Layout />} />
+          <Route path='/adminrooms' element={<AdminRooms />} />
+          <Route path='/adminbookings' element={<AdminBookings />} />
+          <Route path='/adminusers' element={<AdminUser />} />
         </Routes>
       </BrowserRouter>
     </>

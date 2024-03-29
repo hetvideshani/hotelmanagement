@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const room = require('../schema/roomSchema.js')
 
 roomRouter.get('/getAllRoom', async (req, res) => {
-    console.log("Hello");
     const allRooms = await room.find();
 
     return res.status(200).json(allRooms);
@@ -22,9 +21,9 @@ roomRouter.get('/getOneRoom/:id', async (req, res) => {
 })
 
 roomRouter.post('/addroom', async (req, res) => {
-    const { RID, HID, category, picture, rating, available } = req.body;
+    const { RID, HID, HName, category, picture, prize, rating, available } = req.body;
 
-    if (!RID || !HID || !category || !picture || !rating || !available) {
+    if (!RID || !HID || !HName || !category || !picture || !prize || !rating || !available) {
         return res.status(422).json({ error: 'please fill the fields properly' })
     }
 
@@ -35,7 +34,7 @@ roomRouter.post('/addroom', async (req, res) => {
             return res.status(422).json({ error: 'Room already exists' });
         }
 
-        const newRoom = new room({ RID, HID, category, picture, rating, available });
+        const newRoom = new room({ RID, HID, HName, category, picture, prize, rating, available });
 
         await newRoom.save();
         console.log(newRoom);

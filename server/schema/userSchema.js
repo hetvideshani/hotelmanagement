@@ -10,6 +10,11 @@ const roomSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    HName: {
+        type: String,
+        required: true,
+        trim: true,
+    },
     category: {
         type: String,
         required: true,
@@ -18,6 +23,10 @@ const roomSchema = new mongoose.Schema({
     picture: {
         type: String,
         required: true,
+    },
+    prize: {
+        type: Number,
+        required: true
     },
     rating: {
         type: Number,
@@ -45,7 +54,6 @@ const userSchema = new mongoose.Schema({
     },
     location: {
         type: String,
-        required: true,
     },
     password: {
         type: String,
@@ -54,13 +62,10 @@ const userSchema = new mongoose.Schema({
     tokens: [{
         token: {
             type: String,
-            required: true,
         }
     }],
     saved: [{
-        room: {
-            type: roomSchema,
-        }
+        room: roomSchema
     }]
 })
 
